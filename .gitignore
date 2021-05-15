@@ -1,0 +1,14 @@
+dist/*
+target/
+
+project/plugins
+.history
+.cache
+.vscode/
+
+
+### Scala template
+*.class
+*.log
+
+/.idea/
