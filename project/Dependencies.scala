@@ -20,6 +20,13 @@ object Dependencies {
     val ziologging = "0.3.1"
     val flyway = "6.0.8"
     val pureConfig = "0.12.1"
+    val ziokafka = "0.14.0"
+    val ziostreams = "1.0.2"
+  }
+
+  object KAFKA {
+    lazy val streams = "dev.zio" %% "zio-streams" % V.ziostreams
+    lazy val kafka = "dev.zio" %% "zio-kafka"   % V.ziokafka
   }
 
   object ZIO {
@@ -82,6 +89,9 @@ object Dependencies {
   }
 
   lazy val globalProjectDeps = Seq(
+    KAFKA.kafka,
+    KAFKA.streams,
+
     ZIO.core,
     ZIO.cats,
 

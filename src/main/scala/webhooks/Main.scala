@@ -6,6 +6,7 @@ import webhooks.db.DbConnect
 import webhooks.logger.Logger
 import webhooks.server.Server
 
+import com.LonelyDutchhound.webhooks.db.service.WebhookDbService
 import com.LonelyDutchhound.webhooks.service.ApiService
 import zio._
 import zio.blocking.Blocking
@@ -28,7 +29,7 @@ object Main extends App {
     val sys = Blocking.live ++ Clock.live ++ Console.live
     val db = GlobalCfg.live ++ Blocking.live >>> DbConnect.live
     val service = sys ++ db ++ Logger.live ++ GlobalCfg.live
-    service ++ ApiService.live
+    service ++ ApiService.live ++ (db >>> WebhookDbService.live)
   }
 
   override def run(args: List[String]): ZIO[zio.ZEnv, Nothing, ExitCode] = {

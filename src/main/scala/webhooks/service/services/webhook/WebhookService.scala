@@ -2,7 +2,7 @@ package com.LonelyDutchhound
 package webhooks.service.services.webhook
 
 import webhooks.AppEnv
-import webhooks.service.services.webhook.Models.Message
+import webhooks.service.services.webhook.Models.{Webhook}
 import webhooks.service.{ApiService, ApiServiceEffect, RestService, ServiceInfo}
 
 import io.circe.generic.auto._
@@ -19,12 +19,22 @@ object WebhookService extends RestService[AppEnv]{
 
   override protected val services: List[ZServerEndpoint[CoreEnv, _, ApiService.ErrorResponse, _]] = List(
     rootPath
-      .get.description("hello from webhooks")
-      .name("getHello")
-      .in("hello")
-      .out(jsonBody[Message].description("message"))
+      .get.description("get all webhooks")
+      .name("getAllWebhooks")
+      .in("webhooks")
+      .out(jsonBody[Seq[Webhook]].description("webhooks data"))
       .logic(
-        _ => ZIO.effect(Message("hello"))
-      )
+        _ => Logics.getAllWebhooks()
+      ),
+
+//    rootPath
+//      .post.description("add new webhook")
+//      .name("addhook")
+//      .in("webhooks")
+//      .in(jsonBody[Webhook].description("webhook creation data"))
+//      .out(jsonBody[Webhook].description("webhook"))
+//      .logic(
+//        (_, webhook) => Logics.saveWebhook(webhook)
+//      )
   )
 }

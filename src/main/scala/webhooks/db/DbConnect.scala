@@ -29,7 +29,12 @@ object DbConnect {
 
   type HasDbConnect = Has[Service]
 
-  case class DbConnectConfig(url: String, user: String, password: String, driver: String)
+  case class DbConnectConfig(
+                              url: String,
+                              user: String,
+                              password: String,
+                              driver: String
+                            )
 
   case class Service(connect: HikariTransactor[Task]) {
 

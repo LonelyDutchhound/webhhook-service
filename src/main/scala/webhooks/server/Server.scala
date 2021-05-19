@@ -39,9 +39,9 @@ object Server {
   def getMetric: String = {
     (
       registry.getCounters().asScala.map { case (key, value) => s"$key = ${value.getCount}" } ++
-        registry.getMeters().asScala.map { case (key, value) => s"$key = ${value.getCount}" } ++
-        registry.getTimers().asScala.map { case (key, value) => s"$key = ${value.getCount}" }
-      ).mkString("\n")
+      registry.getMeters().asScala.map { case (key, value) => s"$key = ${value.getCount}" } ++
+      registry.getTimers().asScala.map { case (key, value) => s"$key = ${value.getCount}" }
+    ).mkString("\n")
   }
 
   val run: AppTask[Unit] = {

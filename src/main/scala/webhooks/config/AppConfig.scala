@@ -5,11 +5,13 @@ import webhooks.config.GlobalCfg.HasConfig
 import webhooks.db.DbConnect.DbConnectConfig
 import webhooks.server.ServerConfig
 
+import com.LonelyDutchhound.webhooks.kafka.KafkaConfig
 import zio.{URIO, ZIO}
 
 case class AppConfig(
                       server: ServerConfig,
                       dbConfig: DbConnectConfig,
+                      kafkaConfig: KafkaConfig
                     )
 
 

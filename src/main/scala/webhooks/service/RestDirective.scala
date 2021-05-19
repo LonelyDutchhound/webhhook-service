@@ -14,7 +14,7 @@ import java.util.UUID
 trait RestDirective {
 
 
-  implicit class CustZEndpoint[I, O](e: ZEndpoint[I, ErrorResponse, O]) {
+  implicit class CustomZEndpoint[I, O](e: ZEndpoint[I, ErrorResponse, O]) {
     val getSystemName: String = {
       e.info.tags.mkString(".") + "." + e.info.name.getOrElse("None")
     }
