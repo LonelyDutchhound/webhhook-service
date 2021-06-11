@@ -26,7 +26,6 @@ class HttpClient(sttpBackend: SttpBackend[Task, Nothing, WebSocketHandler]) {
         case ext: HttpClientError => ext
         case throwable => SystemError(request, throwable)
       }
-
   }
 }
 
