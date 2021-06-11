@@ -1,13 +1,20 @@
 package com.LonelyDutchhound
 package webhooks.db.model
 
-import doobie.implicits.toSqlInterpolator
-import doobie.{Put, Update, Write}
-import doobie.util.fragment.Fragment
-import doobie.util.fragments.{set, values}
-
 import java.sql.Timestamp
 import java.util.UUID
+
+import doobie.{Put, Write}
+import doobie._
+import doobie.implicits._
+import doobie.postgres._
+import doobie.implicits.javatime._
+import doobie.implicits.javasql._
+import doobie.postgres.implicits._
+import doobie.util.fragment.Fragment
+import doobie.util.fragments._
+import fs2.Stream
+import cats.implicits._
 
 case class Column(name: String, refs: Option[ModelDb[_]] = None) {
   override def toString: String = name

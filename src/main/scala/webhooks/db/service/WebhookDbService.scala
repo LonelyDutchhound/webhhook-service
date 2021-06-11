@@ -15,13 +15,13 @@ object WebhookDbService {
   type  HasWebhookDbService = Has[DbService]
 
   trait DbService {
-    def getAllWebhooks(): RIO[Logging, Seq[Webhook]]
+    def getAllWebhooks: RIO[Logging, Seq[Webhook]]
 
     def saveWebhook(webhook: Webhook): RIO[Logging, Webhook]
 
     def updateWebhook(id: UUID, webhook: Webhook): RIO[Logging, Webhook]
 
-    def deleteWebhook(id: UUID): RIO[Logging, Boolean]
+    def deleteWebhook(id: UUID): RIO[Logging, UUID]
   }
 
   val live: ZLayer[HasDbConnect, Nothing, HasWebhookDbService] = ZLayer.fromEffect {

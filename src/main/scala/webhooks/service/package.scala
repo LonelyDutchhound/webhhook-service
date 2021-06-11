@@ -1,7 +1,7 @@
 package com.LonelyDutchhound
 package webhooks
 
-import webhooks.service.services.webhook.WebhookService
+import webhooks.service.services.webhook.WebhookManagingService
 
 import sttp.tapir.openapi.{Contact, Info}
 import zio.{Has, ZIO}
@@ -21,5 +21,5 @@ package object service {
     None
   )
 
-  val servicesApi: List[RestServiceCore] = List(WebhookService)
+  val servicesApi: List[RestServiceCore] = List(WebhookManagingService)
 }

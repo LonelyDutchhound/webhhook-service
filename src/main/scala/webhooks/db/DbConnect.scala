@@ -1,17 +1,11 @@
 package com.LonelyDutchhound
 package webhooks.db
 
-import cats.data.NonEmptyList
 import cats.effect._
-import doobie.Fragments._
 import doobie.hikari.HikariTransactor
-import doobie.implicits._
 import doobie._
 import doobie.implicits._
-import doobie.postgres._
 import doobie.postgres.implicits._
-import doobie.postgres.pgisimplicits._
-import doobie.implicits.javasql._
 import doobie.util.pos.Pos
 import org.flywaydb.core.Flyway
 import webhooks.config.AppConfig
@@ -20,7 +14,6 @@ import zio.blocking._
 import zio.interop.catz._
 import zio.logging.{Logging, log}
 import zio.{blocking => _, _}
-import scala.jdk.CollectionConverters._
 import cats.implicits._
 
 import java.util.UUID

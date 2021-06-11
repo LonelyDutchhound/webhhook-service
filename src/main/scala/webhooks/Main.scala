@@ -3,11 +3,12 @@ package webhooks
 
 import webhooks.config.GlobalCfg
 import webhooks.db.DbConnect
+import webhooks.db.service.WebhookDbService
+import webhooks.kafka.KafkaProvider
 import webhooks.logger.Logger
 import webhooks.server.Server
+import webhooks.service.ApiService
 
-import com.LonelyDutchhound.webhooks.db.service.WebhookDbService
-import com.LonelyDutchhound.webhooks.service.ApiService
 import zio._
 import zio.blocking.Blocking
 import zio.clock.Clock
@@ -28,8 +29,9 @@ object Main extends App {
   val layers: ZLayer[SystemEnv, Throwable, AppEnv] = {
     val sys = Blocking.live ++ Clock.live ++ Console.live
     val db = GlobalCfg.live ++ Blocking.live >>> DbConnect.live
+    val kafka = GlobalCfg.live >>> KafkaProvider.live
     val service = sys ++ db ++ Logger.live ++ GlobalCfg.live
-    service ++ ApiService.live ++ (db >>> WebhookDbService.live)
+    service ++ kafka ++ ApiService.live ++ (db >>> WebhookDbService.live)
   }
 
   override def run(args: List[String]): ZIO[zio.ZEnv, Nothing, ExitCode] = {

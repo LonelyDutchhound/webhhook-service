@@ -88,6 +88,12 @@ object Dependencies {
     val zioTestSbt = "dev.zio" %% "zio-test-sbt"      %  V.zio % "test"
   }
 
+  object HTTPCLIENT{
+    lazy val core = "com.softwaremill.sttp.client" %% "core" % V.clientSttp
+    lazy val client = "com.softwaremill.sttp.client" %% "async-http-client-backend-zio" % V.clientSttp
+    lazy val circe = "com.softwaremill.sttp.client" %% "circe" % V.clientSttp
+  }
+
   lazy val globalProjectDeps = Seq(
     KAFKA.kafka,
     KAFKA.streams,
@@ -130,6 +136,10 @@ object Dependencies {
     CONFIG.pureConfig,
 
     TEST.zioTest,
-    TEST.zioTestSbt
+    TEST.zioTestSbt,
+
+    HTTPCLIENT.core,
+    HTTPCLIENT.client,
+    HTTPCLIENT.circe
   )
 }
