@@ -33,7 +33,7 @@ class WebhookDbServiceImpl (db: DbConnect.Service) extends DbService {
 
   private def noSuchWebhook(id: UUID) = BadRequest(s"webhook(id=$id) does not exists")
 
-  override def getAllWebhooks(): ZIO[Logging, Throwable, List[Webhook]] = for {
+  override def getAllWebhooks: ZIO[Logging, Throwable, List[Webhook]] = for {
     ret <- db.executeQuery(WebhookModelDb.select.query[WebhookModelDb.Materialize].to[List])
     res = ret.map(t => Webhook(
       Some(t.system.id),

@@ -34,7 +34,7 @@ object KafkaProvider {
 
     val consumerManaged: ZManaged[Clock with Blocking, Throwable, Consumer.Service] =
       Consumer.make(consumerSettings)
-    val producerManaged: ZManaged[Any, Throwable, Producer.Service[Nothing, Long, String]] =
+    val producerManaged: ZManaged[Any, Throwable, Producer.Service[Nothing, Int, String]] =
       Producer.make(producerSettings, Serde.int, Serde.string)
 
     val consumerAndProducer: ZLayer[Clock with Blocking, Throwable, Consumer] =

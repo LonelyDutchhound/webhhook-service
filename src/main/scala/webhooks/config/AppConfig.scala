@@ -10,7 +10,8 @@ import zio.{URIO, ZIO}
 
 case class AppConfig(
                       server: ServerConfig,
-                      dbConfig: DbConnectConfig
+                      dbConfig: DbConnectConfig,
+                      kafkaConfig: KafkaConfig
                     )
 
 
